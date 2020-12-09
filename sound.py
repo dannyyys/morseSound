@@ -10,7 +10,7 @@ class sound:
         self.audio = []
         self.morseText = txt
 
-    def append_silence(self, duration_milliseconds=100):
+    def append_silence(self, duration_milliseconds=50):
         """
         Adding silence is easy - we add zeros to the end of our array
         """
@@ -22,7 +22,7 @@ class sound:
         return
 
 
-    def append_dotWave(self, freq=440.0, duration_milliseconds=100, volume=1.0):
+    def append_dotWave(self, freq=440.0, duration_milliseconds=50, volume=1.0):
  
 
         num_samples = duration_milliseconds * (self.sample_rate / 1000.0)
@@ -32,7 +32,7 @@ class sound:
 
         return
 
-    def append_dashWave(self, freq=440.0, duration_milliseconds=100 * 3, volume=1.0):
+    def append_dashWave(self, freq=440.0, duration_milliseconds=50 * 3, volume=1.0):
 
         num_samples = duration_milliseconds * (self.sample_rate / 1000.0)
 
@@ -80,6 +80,6 @@ class sound:
                 self.append_dashWave(volume=5.0)
                 self.append_silence()
             else:
-                self.append_silence(duration_milliseconds=100*7)
+                self.append_silence(duration_milliseconds=50*7)
         self.save_wav("output.wav")
         return

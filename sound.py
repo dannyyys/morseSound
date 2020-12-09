@@ -5,16 +5,28 @@ import struct
 class sound:
     
     sample_rate = 44100.0
+    duration_milliseconds=50
 
     def __init__(self, txt):
         self.audio = []
         self.morseText = txt
 
-    def append_silence(self, duration_milliseconds=100):
+    def append_silence(self):
         """
         Adding silence is easy - we add zeros to the end of our array
         """
-        num_samples = duration_milliseconds * (self.sample_rate / 1000.0)
+        num_samples = self.duration_milliseconds * (self.sample_rate / 1000.0)
+
+        for x in range(int(num_samples)): 
+            self.audio.append(0.0)
+
+        return
+    
+    def append_silence_space(self):
+        """
+        Adding silence is easy - we add zeros to the end of our array
+        """
+        num_samples = (self.duration_milliseconds*7) * (self.sample_rate / 1000.0)
 
         for x in range(int(num_samples)): 
             self.audio.append(0.0)
@@ -22,19 +34,19 @@ class sound:
         return
 
 
-    def append_dotWave(self, freq=440.0, duration_milliseconds=100, volume=1.0):
+    def append_dotWave(self, freq=440.0, volume=1.0):
  
 
-        num_samples = duration_milliseconds * (self.sample_rate / 1000.0)
+        num_samples = self.duration_milliseconds * (self.sample_rate / 1000.0)
 
         for x in range(int(num_samples)):
             self.audio.append(volume * math.sin(2 * math.pi * freq * ( x / self.sample_rate )))
 
         return
 
-    def append_dashWave(self, freq=440.0, duration_milliseconds=100 * 3, volume=1.0):
+    def append_dashWave(self, freq=440.0, volume=1.0):
 
-        num_samples = duration_milliseconds * (self.sample_rate / 1000.0)
+        num_samples = (self.duration_milliseconds*3) * (self.sample_rate / 1000.0)
 
         for x in range(int(num_samples)):
             self.audio.append(volume * math.sin(2 * math.pi * freq * ( x / self.sample_rate )))
@@ -80,6 +92,6 @@ class sound:
                 self.append_dashWave(volume=5.0)
                 self.append_silence()
             else:
-                self.append_silence(duration_milliseconds=100*7)
+                self.append_silence_space()
         self.save_wav("output.wav")
         return

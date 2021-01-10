@@ -1,3 +1,6 @@
+from sound import sound
+
+
 class MorseCode:
     """This class allow user to instantiate MorseCode object with english text
     and convert given english text into morseCode and morseCodeSound
@@ -87,6 +90,11 @@ class MorseCode:
             str: absolute path to output.wav file that contains 
             morse code representation in sound format  
         """
-        sound = None
+        # Making using of pre-existing sound.py
+        # NOTE: sound.py requires morseCode to generate morseCodeSound
+        # we will have to revisit this sound.py in future
+        sound_object = sound(
+            self.code)  # self.code is morseCode, not english_text
+        morse_code_sound_path = sound_object.toSound()
 
-        return f'{self._english_text} converted to morseCodeSound'
+        return morse_code_sound_path

@@ -8,8 +8,13 @@ while True:
 
     if menu_selection == 1:
         english_text = str(input('Enter english text: '))
-        morseCode = MorseCode(english_text)
 
+        print('Preparing morse code and morse code sound please wait...')
+
+        morseCode = MorseCode(english_text)
         print(morseCode.code)
+
+        morse_code_sound_file_path = morseCode.sound
+        print(morse_code_sound_file_path)
     else:
         break
